@@ -6,6 +6,7 @@
 ## 0. プロジェクト基盤(セットアップ)
 
 - [x] 静的サイトの土台を作る(`index.html` / `styles/` / `assets/`)
+- [x] `package.json`にlint/test/buildコマンドを整備する
 
 ## 1. 進捗トラッカー(既存チェックリストの移植)
 

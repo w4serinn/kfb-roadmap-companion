@@ -53,9 +53,17 @@ kfb-roadmap-companion/
     └── FEATURE_PROPOSALS.md         # 新機能追加の提案リスト
 ```
 
+## 開発コマンド
+
+```bash
+npm install
+npm run lint   # eslintによる静的解析
+npm test       # node --testによるユニットテスト
+npm run build  # index.html / styles/ / assets/ を dist/ にまとめる
+```
+
 ## 未整備な部分(手動で用意が必要)
 
-- `package.json`(lint/test/buildコマンド)はまだ無い。フェーズ1の
+- GitHub Pagesへのデプロイworkflowはまだ無い。フェーズ1の
   「0. プロジェクト基盤(セットアップ)」タスクの中でClaude Codeに
   用意させる想定
-- GitHub Pagesへのデプロイworkflowも同様に未整備

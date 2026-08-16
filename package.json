@@ -1,0 +1,16 @@
+{
+  "name": "kfb-roadmap-companion",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Kawaii Future Bass作曲学習ロードマップ(1年計画)を走り切るための支援サイト",
+  "scripts": {
+    "lint": "eslint .",
+    "test": "node --test",
+    "build": "node scripts/build.js"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.9.0",
+    "eslint": "^9.9.0"
+  }
+}

@@ -21,3 +21,12 @@ evolve/SKILL.mdの手順に従い、1サイクルごとに以下の形式で追�
 - lint: - / test: - / build: -(package.json未整備のため対象コマンドなし。次サブタスクで整備予定)
 - 次回予定: 「0. プロジェクト基盤(セットアップ)」の`package.json`にlint/test/buildコマンドを整備するサブタスク
 - blocked / partial: なし
+
+## 2026-08-16 12:40
+- 実装: 「0. プロジェクト基盤(セットアップ)」の`package.json`にlint/test/buildコマンドを整備するサブタスク。
+  `eslint`(flat config)、`node --test`によるテスト、静的ファイルを`dist/`にまとめる
+  `scripts/build.js`を追加。`.gitignore`に`node_modules/`と`dist/`を追加。README.mdに開発コマンドの案内を追加。
+- レビュー: OK(指摘なし)
+- lint: ✓ / test: ✓(対象テストはまだ0件。progress-logic.js等の実装時に追加予定) / build: ✓
+- 次回予定: 「0. プロジェクト基盤(セットアップ)」の`localStorage`アクセス用ヘルパー(`assets/storage-helper.js`)の実装
+- blocked / partial: なし
