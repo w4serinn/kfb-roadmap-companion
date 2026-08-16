@@ -156,3 +156,19 @@ evolve/SKILL.mdの手順に従い、1サイクルごとに以下の形式で追�
 - lint: ✓ / test: ✓(16件) / build: ✓ / ブラウザ動作確認: ✓(Playwright、リロード後の永続化確認込み)
 - 次回予定: 「1. 進捗トラッカー」の全体進捗を可視化する表示の実装
 - blocked / partial: なし
+
+## 2026-08-16 16:12
+- 実装: 「1. 進捗トラッカー」の全体進捗を可視化する表示。`assets/progress-logic.js`に
+  `calculateProgress`(全チェック項目に対する完了数・完了率を算出)を追加し、
+  id生成を`makeTaskId`/`makeStepId`として共通化(チェックボックス側の表示と
+  集計側でid計算がズレないようにするため)。`assets/roadmap-view.js`に
+  `renderOverallProgress`を追加し、16マスのシーケンサー風メーター(FL Studioの
+  チャンネルラックを意識したデザイン)で表示。チェックボックスのonChange
+  コールバックを`main.js`まで通し、チェックのたびにメーターがリアルタイムで
+  更新されるよう配線。Playwrightでチェック前後のラベル・aria-valuenow・
+  点灯マス数の変化を確認(0/71(0%) → 1/71(1%))。
+  これで「1. 進捗トラッカー」の全サブタスクが完了。
+- レビュー: OK(指摘なし)
+- lint: ✓ / test: ✓(19件) / build: ✓ / ブラウザ動作確認: ✓(Playwright、リアルタイム更新確認込み)
+- 次回予定: 「2. 挫折対策の仕組み」の7日間隔判定・復帰表示切り替えロジック
+- blocked / partial: なし

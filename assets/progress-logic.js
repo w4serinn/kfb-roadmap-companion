@@ -58,3 +58,40 @@ export function hashText(text) {
   }
   return (hash >>> 0).toString(36);
 }
+
+// 週タスク/日次ステップのid生成。表示層(roadmap-view.js)と集計層
+// (calculateProgress)の両方から呼び、id計算がズレないようにする。
+export function makeTaskId(monthId, task) {
+  return `${monthId}:${hashText(`${task.tag}|${task.text}`)}`;
+}
+
+export function makeStepId(taskId, step) {
+  return `${taskId}:${hashText(step)}`;
+}
+
+// 全体の完了率を計算する。1〜4ヶ月目相当(steps有り)は日次ステップ単位、
+// 5ヶ月目以降相当(steps無し)は週タスク単位でカウントする。
+export function calculateProgress(storage, months) {
+  let total = 0;
+  let completed = 0;
+
+  for (const month of months) {
+    for (const task of month.tasks) {
+      const taskId = makeTaskId(month.id, task);
+      const hasSteps = Array.isArray(task.steps) && task.steps.length > 0;
+
+      if (hasSteps) {
+        for (const step of task.steps) {
+          total += 1;
+          if (isChecked(storage, makeStepId(taskId, step))) completed += 1;
+        }
+      } else {
+        total += 1;
+        if (isChecked(storage, taskId)) completed += 1;
+      }
+    }
+  }
+
+  const percent = total === 0 ? 0 : Math.round((completed / total) * 100);
+  return { total, completed, percent };
+}

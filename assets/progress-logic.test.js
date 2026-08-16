@@ -7,6 +7,9 @@ import {
   isChecked,
   setChecked,
   hashText,
+  makeTaskId,
+  makeStepId,
+  calculateProgress,
 } from "./progress-logic.js";
 
 function createFakeStorage() {
@@ -72,4 +75,46 @@ test("hashText: 同じ文字列には常に同じ値を返す", () => {
 
 test("hashText: 異なる文字列には異なる値を返す", () => {
   assert.notEqual(hashText("Week1"), hashText("Week2"));
+});
+
+const sampleMonths = [
+  {
+    id: "m1",
+    tasks: [
+      { tag: "Week1", text: "steps付きタスクA", steps: ["step1", "step2"] },
+      { tag: "Week2", text: "steps付きタスクB", steps: ["step1"] },
+    ],
+  },
+  {
+    id: "m56",
+    tasks: [
+      { tag: "5ヶ月目", text: "stepsなしタスクA", steps: null },
+      { tag: "5ヶ月目", text: "stepsなしタスクB", steps: null },
+    ],
+  },
+];
+
+test("calculateProgress: 何もチェックしていない場合は0%", () => {
+  const storage = createFakeStorage();
+  const result = calculateProgress(storage, sampleMonths);
+  // m1: 2+1=3ステップ、m56: タスク単位で2件 => 合計5件
+  assert.deepEqual(result, { total: 5, completed: 0, percent: 0 });
+});
+
+test("calculateProgress: steps単位・タスク単位それぞれのチェックを反映する", () => {
+  const storage = createFakeStorage();
+  const taskId1 = makeTaskId("m1", sampleMonths[0].tasks[0]);
+  setChecked(storage, makeStepId(taskId1, "step1"), true);
+
+  const taskIdM56 = makeTaskId("m56", sampleMonths[1].tasks[0]);
+  setChecked(storage, taskIdM56, true);
+
+  const result = calculateProgress(storage, sampleMonths);
+  assert.deepEqual(result, { total: 5, completed: 2, percent: 40 });
+});
+
+test("calculateProgress: 対象タスクが無い場合は0%(0除算しない)", () => {
+  const storage = createFakeStorage();
+  const result = calculateProgress(storage, []);
+  assert.deepEqual(result, { total: 0, completed: 0, percent: 0 });
 });

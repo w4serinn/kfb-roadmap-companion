@@ -1,6 +1,6 @@
 // data/roadmap.json を月カード一覧としてDOMに描画する表示層。
 // ロジック(progress-logic.js等)とは分離し、DOM構築のみを担当する。
-import { isChecked, setChecked, hashText } from "./progress-logic.js";
+import { isChecked, setChecked, makeTaskId, makeStepId } from "./progress-logic.js";
 
 function createTaskLink(task) {
   const link = document.createElement("a");
@@ -12,7 +12,7 @@ function createTaskLink(task) {
   return link;
 }
 
-function createCheckItem(id, labelText, storage) {
+function createCheckItem(id, labelText, storage, onChange) {
   const label = document.createElement("label");
   label.className = "check-item";
 
@@ -21,6 +21,7 @@ function createCheckItem(id, labelText, storage) {
   checkbox.checked = isChecked(storage, id);
   checkbox.addEventListener("change", () => {
     setChecked(storage, id, checkbox.checked);
+    if (onChange) onChange();
   });
   label.appendChild(checkbox);
 
@@ -31,19 +32,19 @@ function createCheckItem(id, labelText, storage) {
   return label;
 }
 
-function createStepList(steps, taskId, storage) {
+function createStepList(steps, taskId, storage, onChange) {
   const stepList = document.createElement("ol");
   stepList.className = "week-task__steps";
   stepList.hidden = true;
   for (const step of steps) {
     const stepItem = document.createElement("li");
-    stepItem.appendChild(createCheckItem(`${taskId}:${hashText(step)}`, step, storage));
+    stepItem.appendChild(createCheckItem(makeStepId(taskId, step), step, storage, onChange));
     stepList.appendChild(stepItem);
   }
   return stepList;
 }
 
-function createWeekTaskItem(task, taskId, storage) {
+function createWeekTaskItem(task, taskId, storage, onChange) {
   const item = document.createElement("li");
   item.className = "week-task";
 
@@ -71,7 +72,7 @@ function createWeekTaskItem(task, taskId, storage) {
       item.appendChild(createTaskLink(task));
     }
 
-    const stepList = createStepList(task.steps, taskId, storage);
+    const stepList = createStepList(task.steps, taskId, storage, onChange);
     header.addEventListener("click", () => {
       const expanded = header.getAttribute("aria-expanded") === "true";
       header.setAttribute("aria-expanded", String(!expanded));
@@ -84,13 +85,13 @@ function createWeekTaskItem(task, taskId, storage) {
     if (task.link) {
       item.appendChild(createTaskLink(task));
     }
-    item.appendChild(createCheckItem(taskId, "完了にする", storage));
+    item.appendChild(createCheckItem(taskId, "完了にする", storage, onChange));
   }
 
   return item;
 }
 
-function createMonthCard(month, storage) {
+function createMonthCard(month, storage, onChange) {
   const card = document.createElement("article");
   card.className = "month-card";
 
@@ -114,8 +115,8 @@ function createMonthCard(month, storage) {
   taskList.className = "month-card__tasks";
   taskList.hidden = true;
   for (const task of month.tasks) {
-    const taskId = `${month.id}:${hashText(`${task.tag}|${task.text}`)}`;
-    taskList.appendChild(createWeekTaskItem(task, taskId, storage));
+    const taskId = makeTaskId(month.id, task);
+    taskList.appendChild(createWeekTaskItem(task, taskId, storage, onChange));
   }
 
   header.addEventListener("click", () => {
@@ -129,10 +130,39 @@ function createMonthCard(month, storage) {
   return card;
 }
 
-export function renderMonthCards(container, months, storage) {
+export function renderMonthCards(container, months, storage, onChange) {
   container.replaceChildren();
 
   for (const month of months) {
-    container.appendChild(createMonthCard(month, storage));
+    container.appendChild(createMonthCard(month, storage, onChange));
   }
+}
+
+const SEQUENCER_STEP_COUNT = 16;
+
+export function renderOverallProgress(container, { total, completed, percent }) {
+  container.replaceChildren();
+
+  const label = document.createElement("p");
+  label.className = "overall-progress__label";
+  label.textContent = `全体の進捗: ${completed} / ${total}(${percent}%)`;
+  container.appendChild(label);
+
+  const steps = document.createElement("div");
+  steps.className = "overall-progress__steps";
+  steps.setAttribute("role", "progressbar");
+  steps.setAttribute("aria-valuemin", "0");
+  steps.setAttribute("aria-valuemax", "100");
+  steps.setAttribute("aria-valuenow", String(percent));
+  steps.setAttribute("aria-label", "全体の進捗");
+
+  const litCount =
+    total === 0 ? 0 : Math.round((completed / total) * SEQUENCER_STEP_COUNT);
+  for (let i = 0; i < SEQUENCER_STEP_COUNT; i++) {
+    const cell = document.createElement("span");
+    cell.className = "overall-progress__cell";
+    if (i < litCount) cell.classList.add("is-lit");
+    steps.appendChild(cell);
+  }
+  container.appendChild(steps);
 }
