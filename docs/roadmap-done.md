@@ -7,6 +7,8 @@
 
 - [x] 静的サイトの土台を作る(`index.html` / `styles/` / `assets/`)
 - [x] `package.json`にlint/test/buildコマンドを整備する
+- [x] `localStorage`アクセス用のヘルパー(`kfb-`プレフィックス強制)を
+      `assets/storage-helper.js`に実装する
 
 ## 1. 進捗トラッカー(既存チェックリストの移植)
 

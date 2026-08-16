@@ -40,7 +40,8 @@ kfb-roadmap-companion/
 ├── styles/
 │   └── main.css                     # 全体スタイル
 ├── assets/
-│   └── main.js                      # エントリーポイント(今後ロジックを追加)
+│   ├── main.js                      # エントリーポイント(今後ロジックを追加)
+│   └── storage-helper.js            # localStorageヘルパー(kfb-プレフィックス強制)
 ├── .claude/skills/
 │   ├── evolve/SKILL.md              # 1サイクルの自動開発手順
 │   └── local-review/SKILL.md        # commit前の客観レビュー手順

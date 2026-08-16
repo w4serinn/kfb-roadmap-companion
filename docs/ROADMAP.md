@@ -52,8 +52,6 @@ Kawaii Future Bass作曲学習ロードマップ(1年計画)を実際に走り�
 
 ### 0. プロジェクト基盤(セットアップ) [status: 進行中]
 
-- [ ] `localStorage`アクセス用のヘルパー(`kfb-`プレフィックス強制)を
-      `assets/storage-helper.js`に実装する
 - [ ] GitHub Pagesへのデプロイworkflowを用意する
 
 ### 1. 進捗トラッカー(既存チェックリストの移植) [status: 未着手]
