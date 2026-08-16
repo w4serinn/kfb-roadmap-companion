@@ -4,6 +4,7 @@ import {
   getLastActiveDate,
   calculateProgress,
   shouldShowComebackMode,
+  exportProgressData,
 } from "./progress-logic.js";
 import { renderMonthCards, renderOverallProgress, renderComebackMessage } from "./roadmap-view.js";
 
@@ -39,3 +40,17 @@ fetch("data/roadmap.json")
   .catch(() => {
     monthListContainer.textContent = "ロードマップデータの読み込みに失敗しました。";
   });
+
+const exportButton = document.getElementById("export-progress-button");
+exportButton.addEventListener("click", () => {
+  const data = exportProgressData(window.localStorage);
+  const blob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" });
+  const url = URL.createObjectURL(blob);
+
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = `kfb-progress-${data.exportedAt.slice(0, 10)}.json`;
+  link.click();
+
+  URL.revokeObjectURL(url);
+});

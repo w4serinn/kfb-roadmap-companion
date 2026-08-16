@@ -12,6 +12,8 @@ export default [
         document: "readonly",
         localStorage: "readonly",
         fetch: "readonly",
+        Blob: "readonly",
+        URL: "readonly",
       },
     },
   },

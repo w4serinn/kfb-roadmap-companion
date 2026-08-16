@@ -144,3 +144,18 @@ export function setVersionNote(storage, id, text) {
   setItem(storage, VERSIONS_KEY, JSON.stringify(versions));
   return versions;
 }
+
+const EXPORT_SCHEMA_VERSION = 1;
+
+// 進捗データ一式(チェック状態・バージョンメモ・最終操作日)をエクスポート用の
+// プレーンオブジェクトにまとめる。localStorageのみに保存された1年分の進捗が
+// ブラウザデータ消去・端末変更で失われないよう、書き出し可能にしておく。
+export function exportProgressData(storage, now = new Date()) {
+  return {
+    schemaVersion: EXPORT_SCHEMA_VERSION,
+    exportedAt: now.toISOString(),
+    progress: getProgress(storage),
+    versions: getVersions(storage),
+    lastActiveDate: getLastActiveDate(storage),
+  };
+}

@@ -14,6 +14,7 @@ import {
   getVersions,
   getVersionNote,
   setVersionNote,
+  exportProgressData,
 } from "./progress-logic.js";
 
 function createFakeStorage() {
@@ -182,4 +183,26 @@ test("setVersionNote: 他のidには影響しない", () => {
   setVersionNote(storage, "m56:def", "バージョン3");
   assert.equal(getVersionNote(storage, "m56:abc"), "バージョン1");
   assert.equal(getVersionNote(storage, "m56:def"), "バージョン3");
+});
+
+test("exportProgressData: 何も記録が無い場合も空の状態でエクスポートできる", () => {
+  const storage = createFakeStorage();
+  const result = exportProgressData(storage, new Date(2026, 7, 16, 12, 0, 0));
+  assert.equal(result.schemaVersion, 1);
+  assert.equal(result.exportedAt, new Date(2026, 7, 16, 12, 0, 0).toISOString());
+  assert.deepEqual(result.progress, {});
+  assert.deepEqual(result.versions, {});
+  assert.equal(result.lastActiveDate, null);
+});
+
+test("exportProgressData: 記録済みの内容をまとめて出力する", () => {
+  const storage = createFakeStorage();
+  setChecked(storage, "m1:t0:s0", true);
+  setVersionNote(storage, "m56:abc", "バージョン1");
+  recordLastActiveDate(storage, new Date(2026, 7, 16));
+
+  const result = exportProgressData(storage, new Date(2026, 7, 16, 12, 0, 0));
+  assert.deepEqual(result.progress, { "m1:t0:s0": true });
+  assert.deepEqual(result.versions, { "m56:abc": "バージョン1" });
+  assert.equal(result.lastActiveDate, "2026-08-16");
 });
