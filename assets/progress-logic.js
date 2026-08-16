@@ -159,3 +159,29 @@ export function exportProgressData(storage, now = new Date()) {
     lastActiveDate: getLastActiveDate(storage),
   };
 }
+
+function isPlainObject(value) {
+  return typeof value === "object" && value !== null && !Array.isArray(value);
+}
+
+// exportProgressDataが書き出した形式のデータをlocalStorageに書き戻す。
+// 壊れた/無関係なJSONを読み込ませても例外を投げず、{ ok: false, error } を返す。
+export function importProgressData(storage, data) {
+  if (!isPlainObject(data)) {
+    return { ok: false, error: "invalid-format" };
+  }
+  if (data.schemaVersion !== EXPORT_SCHEMA_VERSION) {
+    return { ok: false, error: "unsupported-version" };
+  }
+  if (!isPlainObject(data.progress) || !isPlainObject(data.versions)) {
+    return { ok: false, error: "invalid-format" };
+  }
+
+  setItem(storage, PROGRESS_KEY, JSON.stringify(data.progress));
+  setItem(storage, VERSIONS_KEY, JSON.stringify(data.versions));
+  if (typeof data.lastActiveDate === "string") {
+    setItem(storage, LAST_ACTIVE_DATE_KEY, data.lastActiveDate);
+  }
+
+  return { ok: true };
+}

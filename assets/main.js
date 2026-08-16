@@ -5,6 +5,7 @@ import {
   calculateProgress,
   shouldShowComebackMode,
   exportProgressData,
+  importProgressData,
 } from "./progress-logic.js";
 import { renderMonthCards, renderOverallProgress, renderComebackMessage } from "./roadmap-view.js";
 
@@ -53,4 +54,31 @@ exportButton.addEventListener("click", () => {
   link.click();
 
   URL.revokeObjectURL(url);
+});
+
+const importInput = document.getElementById("import-progress-input");
+importInput.addEventListener("change", async () => {
+  const file = importInput.files[0];
+  importInput.value = "";
+  if (!file) return;
+
+  if (!window.confirm("現在の進捗を選択したファイルの内容で上書きします。よろしいですか?")) {
+    return;
+  }
+
+  let data;
+  try {
+    data = JSON.parse(await file.text());
+  } catch {
+    window.alert("読み込みに失敗しました。エクスポートしたJSONファイルを選択してください。");
+    return;
+  }
+
+  const result = importProgressData(window.localStorage, data);
+  if (result.ok) {
+    window.alert("進捗データを復元しました。ページを再読み込みします。");
+    window.location.reload();
+  } else {
+    window.alert("読み込みに失敗しました。エクスポートしたJSONファイルを選択してください。");
+  }
 });

@@ -234,3 +234,17 @@ evolve/SKILL.mdの手順に従い、1サイクルごとに以下の形式で追�
 - lint: ✓ / test: ✓(31件) / build: ✓ / ブラウザ動作確認: ✓(Playwright、実ダウンロード検証込み)
 - 次回予定: エクスポートしたJSONを再度読み込んで復元するインポート機能
 - blocked / partial: なし
+
+## 2026-08-16 18:37
+- 実装: 進捗データのインポート機能。`assets/progress-logic.js`に
+  `importProgressData(storage, data)`を追加(schemaVersion・progress/versionsの
+  形式を検証し、不正な入力には例外を投げず`{ ok: false, error }`を返す純粋関数)。
+  フッターに「進捗データをインポート」のファイル選択欄を追加し、`main.js`から
+  選択ファイルを読み込み→`window.confirm`で上書き確認→復元→
+  `window.location.reload()`という流れで配線。Playwrightで実際に
+  エクスポート→localStorageクリア(端末変更を模擬)→インポート→
+  チェック状態が復元されることを実際のダウンロード/ファイル選択込みで確認。
+- レビュー: OK(指摘なし)
+- lint: ✓ / test: ✓(36件) / build: ✓ / ブラウザ動作確認: ✓(Playwright、実際のexport→import往復確認込み)
+- 次回予定: 「進捗をリセット」ボタン(誤操作防止の確認ダイアログ付き)の実装
+- blocked / partial: なし

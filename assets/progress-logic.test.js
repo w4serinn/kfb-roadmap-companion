@@ -15,6 +15,7 @@ import {
   getVersionNote,
   setVersionNote,
   exportProgressData,
+  importProgressData,
 } from "./progress-logic.js";
 
 function createFakeStorage() {
@@ -205,4 +206,54 @@ test("exportProgressData: 記録済みの内容をまとめて出力する", () 
   assert.deepEqual(result.progress, { "m1:t0:s0": true });
   assert.deepEqual(result.versions, { "m56:abc": "バージョン1" });
   assert.equal(result.lastActiveDate, "2026-08-16");
+});
+
+test("importProgressData/exportProgressData: エクスポート→インポートで元の状態に復元できる", () => {
+  const source = createFakeStorage();
+  setChecked(source, "m1:t0:s0", true);
+  setVersionNote(source, "m56:abc", "バージョン1");
+  recordLastActiveDate(source, new Date(2026, 7, 16));
+  const exported = exportProgressData(source, new Date(2026, 7, 16, 12, 0, 0));
+
+  const target = createFakeStorage();
+  const result = importProgressData(target, exported);
+
+  assert.deepEqual(result, { ok: true });
+  assert.equal(isChecked(target, "m1:t0:s0"), true);
+  assert.equal(getVersionNote(target, "m56:abc"), "バージョン1");
+  assert.equal(getLastActiveDate(target), "2026-08-16");
+});
+
+test("importProgressData: 既存データを上書きする", () => {
+  const storage = createFakeStorage();
+  setChecked(storage, "old:id", true);
+  const result = importProgressData(storage, {
+    schemaVersion: 1,
+    progress: { "new:id": true },
+    versions: {},
+    lastActiveDate: null,
+  });
+  assert.deepEqual(result, { ok: true });
+  assert.equal(isChecked(storage, "old:id"), false);
+  assert.equal(isChecked(storage, "new:id"), true);
+});
+
+test("importProgressData: nullや配列など不正な形式はエラーを返し何も書き込まない", () => {
+  const storage = createFakeStorage();
+  assert.deepEqual(importProgressData(storage, null), { ok: false, error: "invalid-format" });
+  assert.deepEqual(importProgressData(storage, []), { ok: false, error: "invalid-format" });
+  assert.deepEqual(importProgressData(storage, "not json"), { ok: false, error: "invalid-format" });
+  assert.deepEqual(getProgress(storage), {});
+});
+
+test("importProgressData: schemaVersionが無い/一致しない場合はエラーを返す", () => {
+  const storage = createFakeStorage();
+  const result = importProgressData(storage, { progress: {}, versions: {} });
+  assert.deepEqual(result, { ok: false, error: "unsupported-version" });
+});
+
+test("importProgressData: progress/versionsが欠けている場合はエラーを返す", () => {
+  const storage = createFakeStorage();
+  const result = importProgressData(storage, { schemaVersion: 1, versions: {} });
+  assert.deepEqual(result, { ok: false, error: "invalid-format" });
 });
