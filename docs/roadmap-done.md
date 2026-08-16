@@ -17,4 +17,4 @@
 
 ## 2. 挫折対策の仕組み
 
-(まだ完了タスクなし)
+- [x] 最終操作日を`localStorage`(`kfb-last-active-date`)に記録する

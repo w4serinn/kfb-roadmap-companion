@@ -40,8 +40,9 @@ kfb-roadmap-companion/
 ├── styles/
 │   └── main.css                     # 全体スタイル
 ├── assets/
-│   ├── main.js                      # エントリーポイント(今後ロジックを追加)
-│   └── storage-helper.js            # localStorageヘルパー(kfb-プレフィックス強制)
+│   ├── main.js                      # エントリーポイント
+│   ├── storage-helper.js            # localStorageヘルパー(kfb-プレフィックス強制)
+│   └── progress-logic.js            # 進捗判定ロジック(最終操作日の記録等)
 ├── .github/workflows/
 │   └── deploy.yml                   # mainへのpushでGitHub Pagesにデプロイ
 ├── .claude/skills/
