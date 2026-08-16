@@ -111,6 +111,11 @@ function createMonthCard(month, storage, onChange) {
   goal.textContent = month.goal;
   header.appendChild(goal);
 
+  const passLine = document.createElement("p");
+  passLine.className = "month-card__pass-line";
+  passLine.textContent = `合格ライン: ${month.passLine}`;
+  header.appendChild(passLine);
+
   const taskList = document.createElement("ul");
   taskList.className = "month-card__tasks";
   taskList.hidden = true;
