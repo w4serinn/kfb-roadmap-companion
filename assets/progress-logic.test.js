@@ -16,6 +16,7 @@ import {
   setVersionNote,
   exportProgressData,
   importProgressData,
+  resetProgress,
 } from "./progress-logic.js";
 
 function createFakeStorage() {
@@ -256,4 +257,24 @@ test("importProgressData: progress/versionsが欠けている場合はエラー�
   const storage = createFakeStorage();
   const result = importProgressData(storage, { schemaVersion: 1, versions: {} });
   assert.deepEqual(result, { ok: false, error: "invalid-format" });
+});
+
+test("resetProgress: チェック状態とバージョンメモを消去する", () => {
+  const storage = createFakeStorage();
+  setChecked(storage, "m1:t0:s0", true);
+  setVersionNote(storage, "m56:abc", "バージョン1");
+
+  resetProgress(storage);
+
+  assert.deepEqual(getProgress(storage), {});
+  assert.deepEqual(getVersions(storage), {});
+});
+
+test("resetProgress: 最終操作日は消去しない", () => {
+  const storage = createFakeStorage();
+  recordLastActiveDate(storage, new Date(2026, 7, 16));
+
+  resetProgress(storage);
+
+  assert.equal(getLastActiveDate(storage), "2026-08-16");
 });

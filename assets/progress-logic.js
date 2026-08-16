@@ -1,6 +1,6 @@
 // 進捗判定まわりの純粋ロジック。DOMや現在時刻を関数内部で直接参照せず、
 // 呼び出し側から storage / now を引数で渡す形にすることでテスト可能にする。
-import { getItem, setItem } from "./storage-helper.js";
+import { getItem, setItem, removeItem } from "./storage-helper.js";
 
 const LAST_ACTIVE_DATE_KEY = "last-active-date";
 
@@ -184,4 +184,11 @@ export function importProgressData(storage, data) {
   }
 
   return { ok: true };
+}
+
+// チェック状態とバージョンメモを全て消去する。最終操作日(挫折対策の判定に
+// 使う)は対象外とする。呼び出し側(UI層)で誤操作防止の確認を挟むこと。
+export function resetProgress(storage) {
+  removeItem(storage, PROGRESS_KEY);
+  removeItem(storage, VERSIONS_KEY);
 }

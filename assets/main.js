@@ -6,6 +6,7 @@ import {
   shouldShowComebackMode,
   exportProgressData,
   importProgressData,
+  resetProgress,
 } from "./progress-logic.js";
 import { renderMonthCards, renderOverallProgress, renderComebackMessage } from "./roadmap-view.js";
 
@@ -81,4 +82,13 @@ importInput.addEventListener("change", async () => {
   } else {
     window.alert("読み込みに失敗しました。エクスポートしたJSONファイルを選択してください。");
   }
+});
+
+const resetButton = document.getElementById("reset-progress-button");
+resetButton.addEventListener("click", () => {
+  if (!window.confirm("全てのチェック状態とバージョンメモを消去します。この操作は取り消せません。よろしいですか?")) {
+    return;
+  }
+  resetProgress(window.localStorage);
+  window.location.reload();
 });
