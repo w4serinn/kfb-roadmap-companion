@@ -21,6 +21,25 @@ export function getLastActiveDate(storage) {
   return getItem(storage, LAST_ACTIVE_DATE_KEY);
 }
 
+function fromIsoDate(isoDate) {
+  const [year, month, day] = isoDate.split("-").map(Number);
+  return new Date(year, month - 1, day);
+}
+
+const COMEBACK_THRESHOLD_DAYS = 7;
+
+// 最終操作日から一定日数以上経過しているかを判定する。lastActiveDateIsoが
+// 無い(初回訪問)場合はfalseを返す。日付比較は時刻を無視した暦日ベースで行う。
+export function shouldShowComebackMode(lastActiveDateIso, now = new Date(), thresholdDays = COMEBACK_THRESHOLD_DAYS) {
+  if (!lastActiveDateIso) return false;
+
+  const lastActive = fromIsoDate(lastActiveDateIso);
+  const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  const diffDays = Math.round((today - lastActive) / (1000 * 60 * 60 * 24));
+
+  return diffDays >= thresholdDays;
+}
+
 const PROGRESS_KEY = "progress";
 
 export function getProgress(storage) {

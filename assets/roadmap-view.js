@@ -138,6 +138,19 @@ export function renderMonthCards(container, months, storage, onChange) {
   }
 }
 
+export function renderComebackMessage(container, message) {
+  container.replaceChildren();
+
+  const card = document.createElement("div");
+  card.className = "comeback-card";
+
+  const text = document.createElement("p");
+  text.textContent = message;
+  card.appendChild(text);
+
+  container.appendChild(card);
+}
+
 const SEQUENCER_STEP_COUNT = 16;
 
 export function renderOverallProgress(container, { total, completed, percent }) {

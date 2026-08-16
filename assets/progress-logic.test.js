@@ -10,6 +10,7 @@ import {
   makeTaskId,
   makeStepId,
   calculateProgress,
+  shouldShowComebackMode,
 } from "./progress-logic.js";
 
 function createFakeStorage() {
@@ -117,4 +118,32 @@ test("calculateProgress: 対象タスクが無い場合は0%(0除算しない)",
   const storage = createFakeStorage();
   const result = calculateProgress(storage, []);
   assert.deepEqual(result, { total: 0, completed: 0, percent: 0 });
+});
+
+test("shouldShowComebackMode: 初回訪問(記録なし)はfalse", () => {
+  assert.equal(shouldShowComebackMode(null, new Date(2026, 7, 16)), false);
+});
+
+test("shouldShowComebackMode: 6日経過はfalse", () => {
+  const lastActive = "2026-08-10";
+  const now = new Date(2026, 7, 16); // 6日後
+  assert.equal(shouldShowComebackMode(lastActive, now), false);
+});
+
+test("shouldShowComebackMode: ちょうど7日経過はtrue", () => {
+  const lastActive = "2026-08-09";
+  const now = new Date(2026, 7, 16); // 7日後
+  assert.equal(shouldShowComebackMode(lastActive, now), true);
+});
+
+test("shouldShowComebackMode: 7日以上経過していればtrue", () => {
+  const lastActive = "2026-07-01";
+  const now = new Date(2026, 7, 16);
+  assert.equal(shouldShowComebackMode(lastActive, now), true);
+});
+
+test("shouldShowComebackMode: 時刻に関わらず暦日ベースで判定する", () => {
+  const lastActive = "2026-08-09";
+  const now = new Date(2026, 7, 16, 23, 59); // 同じ日の遅い時刻でも7日経過扱い
+  assert.equal(shouldShowComebackMode(lastActive, now), true);
 });
