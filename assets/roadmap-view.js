@@ -1,5 +1,6 @@
 // data/roadmap.json を月カード一覧としてDOMに描画する表示層。
 // ロジック(progress-logic.js等)とは分離し、DOM構築のみを担当する。
+import { isChecked, setChecked, hashText } from "./progress-logic.js";
 
 function createTaskLink(task) {
   const link = document.createElement("a");
@@ -11,19 +12,38 @@ function createTaskLink(task) {
   return link;
 }
 
-function createStepList(steps) {
+function createCheckItem(id, labelText, storage) {
+  const label = document.createElement("label");
+  label.className = "check-item";
+
+  const checkbox = document.createElement("input");
+  checkbox.type = "checkbox";
+  checkbox.checked = isChecked(storage, id);
+  checkbox.addEventListener("change", () => {
+    setChecked(storage, id, checkbox.checked);
+  });
+  label.appendChild(checkbox);
+
+  const span = document.createElement("span");
+  span.textContent = labelText;
+  label.appendChild(span);
+
+  return label;
+}
+
+function createStepList(steps, taskId, storage) {
   const stepList = document.createElement("ol");
   stepList.className = "week-task__steps";
   stepList.hidden = true;
   for (const step of steps) {
     const stepItem = document.createElement("li");
-    stepItem.textContent = step;
+    stepItem.appendChild(createCheckItem(`${taskId}:${hashText(step)}`, step, storage));
     stepList.appendChild(stepItem);
   }
   return stepList;
 }
 
-function createWeekTaskItem(task) {
+function createWeekTaskItem(task, taskId, storage) {
   const item = document.createElement("li");
   item.className = "week-task";
 
@@ -51,7 +71,7 @@ function createWeekTaskItem(task) {
       item.appendChild(createTaskLink(task));
     }
 
-    const stepList = createStepList(task.steps);
+    const stepList = createStepList(task.steps, taskId, storage);
     header.addEventListener("click", () => {
       const expanded = header.getAttribute("aria-expanded") === "true";
       header.setAttribute("aria-expanded", String(!expanded));
@@ -64,12 +84,13 @@ function createWeekTaskItem(task) {
     if (task.link) {
       item.appendChild(createTaskLink(task));
     }
+    item.appendChild(createCheckItem(taskId, "完了にする", storage));
   }
 
   return item;
 }
 
-function createMonthCard(month) {
+function createMonthCard(month, storage) {
   const card = document.createElement("article");
   card.className = "month-card";
 
@@ -93,7 +114,8 @@ function createMonthCard(month) {
   taskList.className = "month-card__tasks";
   taskList.hidden = true;
   for (const task of month.tasks) {
-    taskList.appendChild(createWeekTaskItem(task));
+    const taskId = `${month.id}:${hashText(`${task.tag}|${task.text}`)}`;
+    taskList.appendChild(createWeekTaskItem(task, taskId, storage));
   }
 
   header.addEventListener("click", () => {
@@ -107,10 +129,10 @@ function createMonthCard(month) {
   return card;
 }
 
-export function renderMonthCards(container, months) {
+export function renderMonthCards(container, months, storage) {
   container.replaceChildren();
 
   for (const month of months) {
-    container.appendChild(createMonthCard(month));
+    container.appendChild(createMonthCard(month, storage));
   }
 }

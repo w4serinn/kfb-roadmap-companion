@@ -8,7 +8,7 @@ const monthListContainer = document.getElementById("month-list");
 
 fetch("data/roadmap.json")
   .then((response) => response.json())
-  .then((months) => renderMonthCards(monthListContainer, months))
+  .then((months) => renderMonthCards(monthListContainer, months, window.localStorage))
   .catch(() => {
     monthListContainer.textContent = "ロードマップデータの読み込みに失敗しました。";
   });

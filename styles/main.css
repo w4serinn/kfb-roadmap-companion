@@ -199,6 +199,21 @@ body {
   line-height: 1.6;
 }
 
+.check-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 8px;
+  cursor: pointer;
+}
+
+.check-item input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--color-accent);
+  cursor: pointer;
+}
+
 .site-footer {
   width: 100%;
   max-width: 720px;

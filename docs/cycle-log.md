@@ -140,3 +140,19 @@ evolve/SKILL.mdの手順に従い、1サイクルごとに以下の形式で追�
 - 次回予定: 「1. 進捗トラッカー」のチェック状態を`localStorage`(`kfb-progress`)に
   保存する機能の実装
 - blocked / partial: なし
+
+## 2026-08-16 15:46
+- 実装: 「1. 進捗トラッカー」のチェック状態を`localStorage`(`kfb-progress`)に
+  保存する機能。`assets/progress-logic.js`に`getProgress`/`isChecked`/`setChecked`
+  を追加(id→trueのマップをJSON保存、falseは削除)。`assets/roadmap-view.js`で
+  日次ステップ(steps有り)には各ステップにチェックボックス、週タスク(steps無し、
+  5ヶ月目以降相当)には「完了にする」チェックボックスを追加し、`main.js`から
+  `window.localStorage`を渡すよう配線。Playwrightでチェック→リロード後も状態が
+  保持されることを確認。
+- レビュー: 指摘1件対応(自己発見・その場で修正) — チェック項目のidを配列index
+  (`t0`/`s0`)から生成していたため、`data/roadmap.json`に途中挿入があると既存の
+  チェック状態が別項目にズレる問題があった。タグ・本文からの決定論的ハッシュ
+  (`hashText`)ベースのidに変更し、挿入・並べ替えに強くした。
+- lint: ✓ / test: ✓(16件) / build: ✓ / ブラウザ動作確認: ✓(Playwright、リロード後の永続化確認込み)
+- 次回予定: 「1. 進捗トラッカー」の全体進捗を可視化する表示の実装
+- blocked / partial: なし
