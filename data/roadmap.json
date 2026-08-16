@@ -1,0 +1,315 @@
+[
+  {
+    "id": "m1",
+    "name": "1ヶ月目：FL Studioと友達になる",
+    "goal": "ゴール：キック4つ打ち＋コード＋ベースの4小節ループが鳴らせる",
+    "passLine": "4小節ループが一通り鳴れば合格。音質・完成度は一切問わない",
+    "tasks": [
+      {
+        "tag": "Week1",
+        "text": "FL Studioの基本操作（初期設定・プレイリスト・チャンネルラック・ミキサーの役割）",
+        "link": "https://sleepfreaks-dtm.com/category/for-beginner-fl/",
+        "linkText": "Sleepfreaks: FL Studio 初心者編",
+        "steps": [
+          "初期設定とオーディオデバイスの設定を済ませる",
+          "プレイリストにパターンを並べる感覚をつかむ",
+          "チャンネルラックとミキサーの役割を触って確認する",
+          "参考記事を読んで抜けている操作をチェックする"
+        ]
+      },
+      {
+        "tag": "Week2",
+        "text": "ドラムパターンを組む（キック1・3拍、クラップ2・4拍の基本形）",
+        "link": "https://trivisionstudio.com/flstudio-howtouse/",
+        "linkText": "TRIVISION STUDIO: リズム打ち込み",
+        "steps": [
+          "キックを1・3拍に打ち込む",
+          "クラップ／スネアを2・4拍に打ち込む",
+          "ハイハットを刻んで質感を出す",
+          "好きな曲のドラムパターンを聴いて真似してみる"
+        ]
+      },
+      {
+        "tag": "Week3",
+        "text": "コードを鳴らす（ピアノロールでメジャー／マイナーコード打ち込み）",
+        "link": "https://edmmatrix.com/blogs/fl/how-to-use/",
+        "linkText": "EDM MATRIX: FL Studioの使い方",
+        "steps": [
+          "メジャートライアドを1つ打ち込む",
+          "マイナートライアドも打ち込んで響きを聴き比べる",
+          "コードを2〜4個並べて簡単な進行を作る",
+          "気に入った進行を保存しておく"
+        ]
+      },
+      {
+        "tag": "Week4",
+        "text": "ベースを足して4小節ループ完成（ルート音を伸ばすだけでOK）",
+        "link": null,
+        "linkText": null,
+        "steps": [
+          "コードのルート音をベースとして伸ばして重ねる",
+          "ドラム・コード・ベースを同時に鳴らしてバランスを聴く",
+          "音量バランスを軽く調整する",
+          "4小節ループを書き出し「バージョン1」として保存する"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "m2",
+    "name": "2ヶ月目：Vitalと友達になる＋最初の8小節",
+    "goal": "ゴール：自作音色を使った8小節のサビループ完成（最初の目標達成）",
+    "passLine": "8小節が鳴れば合格。音色の完成度は二の次でOK",
+    "tasks": [
+      {
+        "tag": "Week1",
+        "text": "Vitalの構造理解（オシレーター・フィルター・エンベロープ・LFO）",
+        "link": "https://trivisionstudio.com/vital-audio/",
+        "linkText": "TRIVISION STUDIO: Vitalの使い方",
+        "steps": [
+          "オシレーターの波形を切り替えて音の違いを聴く",
+          "フィルターのカットオフ／レゾナンスを動かしてみる",
+          "エンベロープ(ADSR)で音の立ち上がりを変化させる",
+          "LFOをかけて音を揺らしてみる"
+        ]
+      },
+      {
+        "tag": "Week2",
+        "text": "デチューンソー（Supersaw）コードの自作",
+        "link": "https://otoasobidayo.com/kawaii-future-bass210723/",
+        "linkText": "どんぐりの音あそび: Kawaiiサウンドを作る",
+        "steps": [
+          "ソー波を選んでユニゾンを6〜8声に増やす",
+          "デチューン量を調整して広がりを作る",
+          "フィルターエンベロープで音の開き方を作る",
+          "作った音でコードを鳴らして響きを確認する"
+        ]
+      },
+      {
+        "tag": "Week3",
+        "text": "ベル／プラック系の音作り（サイン波＋短ディケイ＋FM少々）",
+        "link": "https://miraistudiokanade.com/synthesizer004/",
+        "linkText": "ミライスタジオ奏: VITALの使い方シリーズ",
+        "steps": [
+          "サイン波オシレーターで基本の音を作る",
+          "ディケイを短くしてプラック感を出す",
+          "FMを少しかけて倍音を足してみる",
+          "ベルとプラック、それぞれ1音色ずつ保存する"
+        ]
+      },
+      {
+        "tag": "Week4",
+        "text": "8小節ループ組み立て（ドラム＋コード＋ベース＋ベル）。完成最優先",
+        "link": null,
+        "linkText": null,
+        "steps": [
+          "ドラムを8小節分打ち込む",
+          "コードとベースを8小節に拡張する",
+          "作ったベル／プラック音色をアクセントに足す",
+          "全体を書き出して「最初の目標達成」を記録する"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "m3",
+    "name": "3ヶ月目：Kawaii Future Bassの三種の神器",
+    "goal": "ゴール：サイドチェイン・ピッチベンド・ボーカルチョップ入りループ",
+    "passLine": "3つ全部が一つのループに入っていれば合格。音量バランスの崩れは無視してOK",
+    "tasks": [
+      {
+        "tag": "Week1",
+        "text": "サイドチェイン（キックに合わせてコードが凹むウネリ）",
+        "link": "https://sleepfreaks-dtm.com/for-advance-fl/sidechain-fl-studio/",
+        "linkText": "Sleepfreaks: サイドチェインを使用する",
+        "steps": [
+          "Fruity Limiterをコードトラックに挿す",
+          "キックをサイドチェイン元として設定する",
+          "アタック／リリースを調整して凹み具合を聴き比べる",
+          "サイドチェインあり／なしを聴き比べて違いを体感する"
+        ]
+      },
+      {
+        "tag": "Week2",
+        "text": "ピッチベンド（コード頭の「しゃくり上げ」）",
+        "link": "https://tomori1039.com/entry/how-to-make-future-bass/",
+        "linkText": "tomori: 俺流Future Bassの作り方",
+        "steps": [
+          "コードの頭に軽いピッチベンドをかけてみる",
+          "しゃくり上げの幅とスピードを調整する",
+          "リードにもピッチベンドを試してみる",
+          "参考動画で仕上げのイメージを掴む"
+        ]
+      },
+      {
+        "tag": "Week3",
+        "text": "ボーカルチョップ入門（Slicexでスライス、Pitcher/Newtoneでピッチ調整）",
+        "link": "https://katoten.com/how-to-vocal-chop-fl-studio-dtm/",
+        "linkText": "Katoten's Lab: ボーカルチョップのやり方",
+        "steps": [
+          "無料アカペラ素材をLoopermanなどから入手する",
+          "Slicexでスライスしてみる",
+          "Pitcher／Newtoneでピッチを調整する",
+          "チョップしたボーカルをループに軽く乗せてみる"
+        ]
+      },
+      {
+        "tag": "Week4",
+        "text": "三種の神器を全部入れた8小節ループ制作",
+        "link": "https://trivisionstudio.com/vocalchop/",
+        "linkText": "TRIVISION STUDIO: ボーカルチョップの作り方",
+        "steps": [
+          "サイドチェインをループ全体に適用する",
+          "ピッチベンドをコード／リードに足す",
+          "ボーカルチョップをアクセントとして配置する",
+          "3つを組み合わせた状態で書き出す"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "m4",
+    "name": "4ヶ月目：耳コピ強化月間",
+    "goal": "ゴール：好きな曲のサビ8小節のコード進行とドラムパターンを再現",
+    "passLine": "ベース音だけ合っていれば合格。完コピは目指さない。ChordifyやChord Trackerで答え合わせしてOK",
+    "tasks": [
+      {
+        "tag": "Week1-2",
+        "text": "コード進行の耳コピ（キー特定→ダイアトニックコード割り出し→ベース音から確定）",
+        "link": "https://sakkyoku.info/beginner/playing-by-ear-method/",
+        "linkText": "うちやま作曲教室: 耳コピのやり方",
+        "steps": [
+          "好きな曲のサビ8小節を決める",
+          "キーを特定する",
+          "ダイアトニックコードを割り出す",
+          "ベース音から進行を確定させる"
+        ]
+      },
+      {
+        "tag": "Week3",
+        "text": "ドラムパターンとフィル（スネアロール・逆シンバル）の再現",
+        "link": "https://sleepfreaks-dtm.com/produce-recipe/future-bass-1/",
+        "linkText": "Sleepfreaks: Future Bassの作り方1",
+        "steps": [
+          "サビのドラムパターンを聴き取って打ち込む",
+          "スネアロールを再現してみる",
+          "逆シンバルなどのFXを探して足す",
+          "フィル込みで通しで聴き比べる"
+        ]
+      },
+      {
+        "tag": "Week4",
+        "text": "音色も寄せてみる（完コピでなく「近い質感」でOK）",
+        "link": "https://note.com/ryosasaki0620/n/ne5eecce091c1",
+        "linkText": "Ryo Sasaki: 耳コピを楽にするための基本術",
+        "steps": [
+          "元曲の音色の質感（明るさ／太さ）を言葉にしてみる",
+          "近い質感になるようVitalのパラメータを調整する",
+          "完コピを目指さず「近い」で区切りをつける",
+          "耳コピした8小節を保存する"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "m56",
+    "name": "5〜6ヶ月目：1曲の構成を作る",
+    "goal": "ゴール：イントロ→ビルドアップ→ドロップ→ブレイクの1分半〜2分の曲を1本完成",
+    "passLine": "書き出せる状態になれば合格。クオリティより「1曲通して鳴ること」を優先",
+    "tasks": [
+      {
+        "tag": "5ヶ月目",
+        "text": "構成の型を学ぶ（Intro→Verse→Build-up→Drop→Break→Drop2）",
+        "link": "https://note.com/kingtiptoe/n/n2114c943b72a",
+        "linkText": "king tiptoe: Kawaii Future Bassの作り方 1/4",
+        "steps": null
+      },
+      {
+        "tag": "5ヶ月目",
+        "text": "Kawaii Future Bassの制作全体像を動画で掴む",
+        "link": "https://www.youtube.com/watch?v=c7Od3WDaqHE",
+        "linkText": "さっきー: Kawaii Future Bassの作り方を解説！",
+        "steps": null
+      },
+      {
+        "tag": "6ヶ月目",
+        "text": "自分の8小節ループをドロップに据えて前後を作り、1曲完成",
+        "link": "https://note.com/thestructures/n/ne4e97fed64da",
+        "linkText": "The Structures: 俺流Future Bassの作り方",
+        "steps": null
+      }
+    ]
+  },
+  {
+    "id": "m79",
+    "name": "7〜9ヶ月目：量産と質の向上",
+    "goal": "ゴール：2〜3週間に1曲ペースで計4〜5曲。1曲は人に聴かせる",
+    "passLine": "2〜3週間で1曲書き出せれば合格。音質より完成数を優先する時期",
+    "tasks": [
+      {
+        "tag": "ミックス",
+        "text": "音量→パン→EQ→コンプ→空間系の順で処理。EQは「引き算」から",
+        "link": "https://kasamemusic.com/lesson-diary/180674.html",
+        "linkText": "カサメミュージックスクール: ミックスの基本の流れ",
+        "steps": null
+      },
+      {
+        "tag": "EQ/コンプ",
+        "text": "各エフェクトの目的と具体的用法を深掘り",
+        "link": "https://kensukeinage.com/mix_eq_comp_basic/",
+        "linkText": "OTO×NOMA: EQ＆コンプの基本テクニック",
+        "steps": null
+      },
+      {
+        "tag": "Serum",
+        "text": "Serum検討（Vitalで理屈が分かっていれば移行は簡単。急がなくてよい）",
+        "link": "https://dtmer.info/vital/",
+        "linkText": "DTMer.info: Vitalまとめ",
+        "steps": null
+      },
+      {
+        "tag": "公開",
+        "text": "SoundCloudやXに1曲アップして外の空気に触れる",
+        "link": null,
+        "linkText": null,
+        "steps": null
+      },
+      {
+        "tag": "挑戦",
+        "text": "hiphop挑戦（BPM80〜90、スウィング、サンプルチョップで1曲）",
+        "link": null,
+        "linkText": null,
+        "steps": null
+      }
+    ]
+  },
+  {
+    "id": "m1012",
+    "name": "10〜12ヶ月目：自分の色を探す",
+    "goal": "ゴール：「自分の曲」と言える代表曲を1本、納得いくまで作る",
+    "passLine": "納得できるまで作り込んでOKな唯一の時期。完成を急がなくていい",
+    "tasks": [
+      {
+        "tag": "集大成",
+        "text": "これまでの量産で見つけた「自分が気持ちいい要素」を意識的に盛り込む",
+        "link": null,
+        "linkText": null,
+        "steps": null
+      },
+      {
+        "tag": "仕上げ",
+        "text": "マスタリング入門（リミッターで音圧、リファレンス曲と聴き比べ）",
+        "link": null,
+        "linkText": null,
+        "steps": null
+      },
+      {
+        "tag": "余力枠",
+        "text": "余力があればEDM他ジャンルのドロップを1つ試作",
+        "link": null,
+        "linkText": null,
+        "steps": null
+      }
+    ]
+  }
+]

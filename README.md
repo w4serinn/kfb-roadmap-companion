@@ -43,6 +43,8 @@ kfb-roadmap-companion/
 │   ├── main.js                      # エントリーポイント
 │   ├── storage-helper.js            # localStorageヘルパー(kfb-プレフィックス強制)
 │   └── progress-logic.js            # 進捗判定ロジック(最終操作日の記録等)
+├── data/
+│   └── roadmap.json                 # 1年計画のロードマップデータ(月・週・日次ステップ)
 ├── .github/workflows/
 │   └── deploy.yml                   # mainへのpushでGitHub Pagesにデプロイ
 ├── .claude/skills/

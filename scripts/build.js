@@ -5,7 +5,7 @@ import { join } from "node:path";
 
 const rootDir = new URL("..", import.meta.url).pathname.replace(/^\/([A-Za-z]:)/, "$1");
 const distDir = join(rootDir, "dist");
-const entries = ["index.html", "styles", "assets"];
+const entries = ["index.html", "styles", "assets", "data"];
 
 rmSync(distDir, { recursive: true, force: true });
 mkdirSync(distDir, { recursive: true });
