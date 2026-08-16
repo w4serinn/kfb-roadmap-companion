@@ -1,6 +1,28 @@
 // data/roadmap.json を月カード一覧としてDOMに描画する表示層。
 // ロジック(progress-logic.js等)とは分離し、DOM構築のみを担当する。
 
+function createTaskLink(task) {
+  const link = document.createElement("a");
+  link.className = "week-task__link";
+  link.href = task.link;
+  link.target = "_blank";
+  link.rel = "noopener noreferrer";
+  link.textContent = task.linkText || task.link;
+  return link;
+}
+
+function createStepList(steps) {
+  const stepList = document.createElement("ol");
+  stepList.className = "week-task__steps";
+  stepList.hidden = true;
+  for (const step of steps) {
+    const stepItem = document.createElement("li");
+    stepItem.textContent = step;
+    stepList.appendChild(stepItem);
+  }
+  return stepList;
+}
+
 function createWeekTaskItem(task) {
   const item = document.createElement("li");
   item.className = "week-task";
@@ -8,21 +30,40 @@ function createWeekTaskItem(task) {
   const tag = document.createElement("span");
   tag.className = "week-task__tag";
   tag.textContent = task.tag;
-  item.appendChild(tag);
 
   const text = document.createElement("p");
   text.className = "week-task__text";
   text.textContent = task.text;
-  item.appendChild(text);
 
-  if (task.link) {
-    const link = document.createElement("a");
-    link.className = "week-task__link";
-    link.href = task.link;
-    link.target = "_blank";
-    link.rel = "noopener noreferrer";
-    link.textContent = task.linkText || task.link;
-    item.appendChild(link);
+  const hasSteps = Array.isArray(task.steps) && task.steps.length > 0;
+
+  if (hasSteps) {
+    const header = document.createElement("button");
+    header.type = "button";
+    header.className = "week-task__header";
+    header.setAttribute("aria-expanded", "false");
+    header.setAttribute("aria-label", `${task.tag}のステップを開閉`);
+    header.appendChild(tag);
+    header.appendChild(text);
+    item.appendChild(header);
+
+    if (task.link) {
+      item.appendChild(createTaskLink(task));
+    }
+
+    const stepList = createStepList(task.steps);
+    header.addEventListener("click", () => {
+      const expanded = header.getAttribute("aria-expanded") === "true";
+      header.setAttribute("aria-expanded", String(!expanded));
+      stepList.hidden = expanded;
+    });
+    item.appendChild(stepList);
+  } else {
+    item.appendChild(tag);
+    item.appendChild(text);
+    if (task.link) {
+      item.appendChild(createTaskLink(task));
+    }
   }
 
   return item;
