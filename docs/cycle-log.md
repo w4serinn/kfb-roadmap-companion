@@ -39,3 +39,18 @@ evolve/SKILL.mdの手順に従い、1サイクルごとに以下の形式で追�
 - lint: ✓ / test: ✓(5件) / build: ✓
 - 次回予定: 「0. プロジェクト基盤(セットアップ)」のGitHub Pagesへのデプロイworkflowを用意する
 - blocked / partial: なし
+
+## 2026-08-16 13:31
+- 実装: 「0. プロジェクト基盤(セットアップ)」のGitHub Pagesへのデプロイworkflow
+  `.github/workflows/deploy.yml`を追加(mainへのpushでlint/test/build後に`dist/`を
+  デプロイ)。あわせて、テスト時にビルド前提のバグを発見: `scripts/build.js`が
+  `assets/*.test.js`もそのまま`dist/`にコピーしてしまい、`node --test`が
+  リポジトリ全体を再帰的にスキャンする既定挙動と組み合わさってテストが二重実行
+  される不具合があったため、build.jsにテストファイル除外フィルタを追加し、
+  `npm test`のスキャン対象を`assets`ディレクトリに限定して修正。
+  これでfeature 0「プロジェクト基盤(セットアップ)」の全サブタスクが完了。
+- レビュー: OK(指摘なし。ビルド起因の不具合は実装中に発見しその場で修正)
+- lint: ✓ / test: ✓(5件) / build: ✓(dist/にテストファイルが含まれないことを確認)
+- 次回予定: 「1. 進捗トラッカー(既存チェックリストの移植)」の最初のサブタスク
+  (ロードマップデータを`data/roadmap.json`相当の形に移植する)
+- blocked / partial: なし

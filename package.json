@@ -6,7 +6,7 @@
   "description": "Kawaii Future Bass作曲学習ロードマップ(1年計画)を走り切るための支援サイト",
   "scripts": {
     "lint": "eslint .",
-    "test": "node --test",
+    "test": "node --test assets",
     "build": "node scripts/build.js"
   },
   "devDependencies": {

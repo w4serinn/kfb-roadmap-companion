@@ -13,7 +13,10 @@ mkdirSync(distDir, { recursive: true });
 for (const entry of entries) {
   const src = join(rootDir, entry);
   if (!existsSync(src)) continue;
-  cpSync(src, join(distDir, entry), { recursive: true });
+  cpSync(src, join(distDir, entry), {
+    recursive: true,
+    filter: (source) => !source.endsWith(".test.js"),
+  });
 }
 
 console.log(`build: ${entries.join(", ")} -> dist/`);

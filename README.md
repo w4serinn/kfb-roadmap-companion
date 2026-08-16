@@ -42,6 +42,8 @@ kfb-roadmap-companion/
 ├── assets/
 │   ├── main.js                      # エントリーポイント(今後ロジックを追加)
 │   └── storage-helper.js            # localStorageヘルパー(kfb-プレフィックス強制)
+├── .github/workflows/
+│   └── deploy.yml                   # mainへのpushでGitHub Pagesにデプロイ
 ├── .claude/skills/
 │   ├── evolve/SKILL.md              # 1サイクルの自動開発手順
 │   └── local-review/SKILL.md        # commit前の客観レビュー手順
@@ -63,8 +65,8 @@ npm test       # node --testによるユニットテスト
 npm run build  # index.html / styles/ / assets/ を dist/ にまとめる
 ```
 
-## 未整備な部分(手動で用意が必要)
+## GitHub Pagesの有効化(手動で1回だけ必要)
 
-- GitHub Pagesへのデプロイworkflowはまだ無い。フェーズ1の
-  「0. プロジェクト基盤(セットアップ)」タスクの中でClaude Codeに
-  用意させる想定
+`.github/workflows/deploy.yml`はmainへのpushで自動デプロイするが、リポジトリの
+Settings → Pages → Source を「GitHub Actions」に切り替える設定は人間が1回だけ
+手動で行う必要がある。
