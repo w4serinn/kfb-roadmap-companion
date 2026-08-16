@@ -66,8 +66,13 @@ kfb-roadmap-companion/
 npm install
 npm run lint   # eslintによる静的解析
 npm test       # node --testによるユニットテスト
-npm run build  # index.html / styles/ / assets/ を dist/ にまとめる
+npm run build  # index.html / styles/ / assets/ / data/ を dist/ にまとめる
+npm run dev    # ローカルサーバーで確認(http://localhost:8080)
 ```
+
+`index.html`をブラウザで直接開く(`file://`で開く)と、ESモジュール
+(`<script type="module">`)がCORS制限で読み込めず、画面が「読み込み中…」の
+まま止まって見える。ローカルで確認する際は必ず`npm run dev`を使うこと。
 
 ## GitHub Pagesの有効化(手動で1回だけ必要)
 
