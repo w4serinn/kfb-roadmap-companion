@@ -1,6 +1,6 @@
 // data/roadmap.json を月カード一覧としてDOMに描画する表示層。
 // ロジック(progress-logic.js等)とは分離し、DOM構築のみを担当する。
-import { isChecked, setChecked, makeTaskId, makeStepId } from "./progress-logic.js";
+import { isChecked, setChecked, makeTaskId, makeStepId, getVersionNote, setVersionNote } from "./progress-logic.js";
 
 function createTaskLink(task) {
   const link = document.createElement("a");
@@ -30,6 +30,28 @@ function createCheckItem(id, labelText, storage, onChange) {
   label.appendChild(span);
 
   return label;
+}
+
+function createVersionInput(taskId, storage) {
+  const wrapper = document.createElement("label");
+  wrapper.className = "version-input";
+
+  const labelText = document.createElement("span");
+  labelText.className = "version-input__label";
+  labelText.textContent = "バージョンメモ";
+  wrapper.appendChild(labelText);
+
+  const input = document.createElement("input");
+  input.type = "text";
+  input.className = "version-input__field";
+  input.placeholder = "例: バージョン1";
+  input.value = getVersionNote(storage, taskId);
+  input.addEventListener("change", () => {
+    setVersionNote(storage, taskId, input.value);
+  });
+  wrapper.appendChild(input);
+
+  return wrapper;
 }
 
 function createStepList(steps, taskId, storage, onChange) {
@@ -86,6 +108,7 @@ function createWeekTaskItem(task, taskId, storage, onChange) {
       item.appendChild(createTaskLink(task));
     }
     item.appendChild(createCheckItem(taskId, "完了にする", storage, onChange));
+    item.appendChild(createVersionInput(taskId, storage));
   }
 
   return item;

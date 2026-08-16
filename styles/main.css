@@ -266,6 +266,36 @@ body {
   cursor: pointer;
 }
 
+.version-input {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.version-input__label {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+  white-space: nowrap;
+}
+
+.version-input__field {
+  flex: 1;
+  max-width: 200px;
+  padding: 6px 10px;
+  border: 1px solid rgba(122, 111, 143, 0.25);
+  border-radius: var(--radius-md);
+  font: inherit;
+  font-size: 0.85rem;
+  color: var(--color-text);
+  background: var(--color-bg);
+}
+
+.version-input__field:focus {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 1px;
+}
+
 .site-footer {
   width: 100%;
   max-width: 720px;

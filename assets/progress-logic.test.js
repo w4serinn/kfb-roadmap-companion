@@ -11,6 +11,9 @@ import {
   makeStepId,
   calculateProgress,
   shouldShowComebackMode,
+  getVersions,
+  getVersionNote,
+  setVersionNote,
 } from "./progress-logic.js";
 
 function createFakeStorage() {
@@ -146,4 +149,37 @@ test("shouldShowComebackMode: 時刻に関わらず暦日ベースで判定す�
   const lastActive = "2026-08-09";
   const now = new Date(2026, 7, 16, 23, 59); // 同じ日の遅い時刻でも7日経過扱い
   assert.equal(shouldShowComebackMode(lastActive, now), true);
+});
+
+test("getVersionNote: 未記録の場合は空文字を返す", () => {
+  const storage = createFakeStorage();
+  assert.equal(getVersionNote(storage, "m56:abc"), "");
+});
+
+test("setVersionNote/getVersionNote: 記録した内容を取得できる", () => {
+  const storage = createFakeStorage();
+  setVersionNote(storage, "m56:abc", "バージョン1");
+  assert.equal(getVersionNote(storage, "m56:abc"), "バージョン1");
+});
+
+test("setVersionNote: 前後の空白はtrimして保存する", () => {
+  const storage = createFakeStorage();
+  setVersionNote(storage, "m56:abc", "  バージョン2  ");
+  assert.equal(getVersionNote(storage, "m56:abc"), "バージョン2");
+});
+
+test("setVersionNote: 空文字にすると記録から削除される", () => {
+  const storage = createFakeStorage();
+  setVersionNote(storage, "m56:abc", "バージョン1");
+  setVersionNote(storage, "m56:abc", "");
+  assert.equal(getVersionNote(storage, "m56:abc"), "");
+  assert.deepEqual(getVersions(storage), {});
+});
+
+test("setVersionNote: 他のidには影響しない", () => {
+  const storage = createFakeStorage();
+  setVersionNote(storage, "m56:abc", "バージョン1");
+  setVersionNote(storage, "m56:def", "バージョン3");
+  assert.equal(getVersionNote(storage, "m56:abc"), "バージョン1");
+  assert.equal(getVersionNote(storage, "m56:def"), "バージョン3");
 });

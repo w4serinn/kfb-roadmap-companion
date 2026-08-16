@@ -114,3 +114,33 @@ export function calculateProgress(storage, months) {
   const percent = total === 0 ? 0 : Math.round((completed / total) * 100);
   return { total, completed, percent };
 }
+
+const VERSIONS_KEY = "versions";
+
+// 制作系タスクの「バージョンメモ」(例: バージョン1, バージョン2)を管理する。
+// 完成度を無限に追い求めず「一旦完成」で次に進む後押しのための軽量な記録欄。
+export function getVersions(storage) {
+  const raw = getItem(storage, VERSIONS_KEY);
+  if (!raw) return {};
+  try {
+    return JSON.parse(raw);
+  } catch {
+    return {};
+  }
+}
+
+export function getVersionNote(storage, id) {
+  return getVersions(storage)[id] || "";
+}
+
+export function setVersionNote(storage, id, text) {
+  const versions = getVersions(storage);
+  const trimmed = text.trim();
+  if (trimmed) {
+    versions[id] = trimmed;
+  } else {
+    delete versions[id];
+  }
+  setItem(storage, VERSIONS_KEY, JSON.stringify(versions));
+  return versions;
+}
