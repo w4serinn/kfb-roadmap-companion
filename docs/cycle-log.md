@@ -13,7 +13,7 @@ evolve/SKILL.mdの手順に従い、1サイクルごとに以下の形式で追�
 
 ---
 
-## 2026-08-16 12:10
+## 2026-08-16 11:38
 - 実装: 「0. プロジェクト基盤(セットアップ)」の最初のサブタスク「静的サイトの土台を作る」。
   `index.html`(進捗トラッカーのプレースホルダー)、`styles/main.css`(kawaii系配色)、
   `assets/main.js`(エントリーポイントの空スタブ)を新規作成。README.mdのディレクトリ構成も更新。
@@ -22,7 +22,7 @@ evolve/SKILL.mdの手順に従い、1サイクルごとに以下の形式で追�
 - 次回予定: 「0. プロジェクト基盤(セットアップ)」の`package.json`にlint/test/buildコマンドを整備するサブタスク
 - blocked / partial: なし
 
-## 2026-08-16 12:40
+## 2026-08-16 12:19
 - 実装: 「0. プロジェクト基盤(セットアップ)」の`package.json`にlint/test/buildコマンドを整備するサブタスク。
   `eslint`(flat config)、`node --test`によるテスト、静的ファイルを`dist/`にまとめる
   `scripts/build.js`を追加。`.gitignore`に`node_modules/`と`dist/`を追加。README.mdに開発コマンドの案内を追加。
@@ -31,7 +31,7 @@ evolve/SKILL.mdの手順に従い、1サイクルごとに以下の形式で追�
 - 次回予定: 「0. プロジェクト基盤(セットアップ)」の`localStorage`アクセス用ヘルパー(`assets/storage-helper.js`)の実装
 - blocked / partial: なし
 
-## 2026-08-16 13:10
+## 2026-08-16 12:33
 - 実装: 「0. プロジェクト基盤(セットアップ)」の`localStorage`アクセス用ヘルパー`assets/storage-helper.js`を実装。
   `kfb-`プレフィックスを強制する`toPrefixedKey`/`getItem`/`setItem`/`removeItem`を提供し、
   storageオブジェクトを引数で受け取る形にしてテスト容易性を確保。ユニットテスト5件を追加。
