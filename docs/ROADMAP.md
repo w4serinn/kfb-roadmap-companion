@@ -50,9 +50,8 @@ Kawaii Future Bass作曲学習ロードマップ(1年計画)を実際に走り�
 
 各機能はS/Mサブタスクに分割し、数サイクルかけて完成させる。
 
-### 0. プロジェクト基盤(セットアップ) [status: 未着手]
+### 0. プロジェクト基盤(セットアップ) [status: 進行中]
 
-- [ ] 静的サイトの土台を作る(`index.html` / `styles/` / `assets/`)
 - [ ] `package.json`にlint/test/buildコマンドを整備する
 - [ ] `localStorage`アクセス用のヘルパー(`kfb-`プレフィックス強制)を
       `assets/storage-helper.js`に実装する

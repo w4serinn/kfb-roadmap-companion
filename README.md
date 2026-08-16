@@ -36,6 +36,11 @@ Kawaii Future Bass作曲学習ロードマップ(1年計画)を実際に走り�
 kfb-roadmap-companion/
 ├── DESIGN.md                        # 設計書(目的・非ゴール・5レイヤー構成)
 ├── README.md                        # 本書
+├── index.html                       # レイヤー1(進捗トラッカー)の土台
+├── styles/
+│   └── main.css                     # 全体スタイル
+├── assets/
+│   └── main.js                      # エントリーポイント(今後ロジックを追加)
 ├── .claude/skills/
 │   ├── evolve/SKILL.md              # 1サイクルの自動開発手順
 │   └── local-review/SKILL.md        # commit前の客観レビュー手順

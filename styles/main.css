@@ -1,0 +1,93 @@
+:root {
+  --color-bg: #fdf3fb;
+  --color-bg-gradient-end: #eef1ff;
+  --color-surface: #ffffff;
+  --color-text: #3a2e4d;
+  --color-text-muted: #7a6f8f;
+  --color-accent: #ff8fc7;
+  --color-accent-soft: #d6c8ff;
+  --radius-lg: 20px;
+  --radius-md: 12px;
+  font-family: "Hiragino Maru Gothic ProN", "Yu Gothic", "Segoe UI", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: linear-gradient(160deg, var(--color-bg), var(--color-bg-gradient-end));
+  color: var(--color-text);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.site-header {
+  width: 100%;
+  max-width: 720px;
+  padding: 48px 24px 24px;
+  text-align: center;
+}
+
+.site-header__eyebrow {
+  margin: 0 0 8px;
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  color: var(--color-text-muted);
+}
+
+.site-header__title {
+  margin: 0 0 8px;
+  font-size: 2rem;
+  color: var(--color-accent);
+}
+
+@supports (background-clip: text) or (-webkit-background-clip: text) {
+  .site-header__title {
+    background: linear-gradient(90deg, var(--color-accent), var(--color-accent-soft));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+}
+
+.site-header__tagline {
+  margin: 0;
+  color: var(--color-text-muted);
+}
+
+#app {
+  width: 100%;
+  max-width: 720px;
+  padding: 0 24px;
+  flex: 1;
+}
+
+.placeholder-card {
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  padding: 32px;
+  box-shadow: 0 12px 32px rgba(122, 111, 143, 0.12);
+  text-align: center;
+}
+
+.placeholder-card h2 {
+  margin-top: 0;
+}
+
+.placeholder-card p {
+  color: var(--color-text-muted);
+  line-height: 1.7;
+}
+
+.site-footer {
+  width: 100%;
+  max-width: 720px;
+  padding: 24px;
+  text-align: center;
+  color: var(--color-text-muted);
+  font-size: 0.85rem;
+}
